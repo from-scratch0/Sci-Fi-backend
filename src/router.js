@@ -11,6 +11,7 @@ import Albums from "./pages/albums";
 import Passengers from "./pages/passengers";
 import NotFound from "./common/notFound";
 import logo from "./logo.png";
+import Login from './pages/login';
 
 
 class Routers extends Component {
@@ -24,6 +25,7 @@ class Routers extends Component {
                 <Router>
                     <Switch>
                         <Route exact path = "/" component={Home} />
+                        <Route path="/login" component={Login} />
                         <Route path="/movies" component={Movies} />
                         <Route path="/books" component={Books} />
                         <Route path="/science" component={Science} />

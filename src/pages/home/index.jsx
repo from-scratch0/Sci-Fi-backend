@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink, Link } from "react-router-dom";
 import 'antd/dist/antd.css';
 import { Button } from 'antd';
 
@@ -8,7 +9,10 @@ function Home() {
       <main className="container">
         
       </main>
-      <Button>确定</Button>
+      <NavLink className="nav-link" to="/login">
+
+        <Button>确定</Button>
+      </NavLink>
     </div>
   );
 }
