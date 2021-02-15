@@ -1,20 +1,38 @@
-import React from "react";
+import React, { Component } from 'react';
 import { NavLink, Link } from "react-router-dom";
 import 'antd/dist/antd.css';
-import { Button } from 'antd';
+import { Button, message } from 'antd';
+import user from '../../service/user';
 
-function Home() {
-  return (
-    <div className="Home">
-      <main className="container">
+class Home extends Component {
+  state = { username: '' }
+  UNSAFE_componentWillMount() {
+    let username = sessionStorage.getItem('username');
+    this.setState({ username });
+  }
+  logout = () => {
+    user.signout().then(data => {
+      if(data.code == 0) {
+        sessionStorage.removeItem('username');
+        this.props.history.push('/login');
+      } else {
+        message.error(data.error);
+      }
+    })
+  }
+  render() {
+    return (
+      <div className="Home">
+        {
+          !sessionStorage.getItem('username') ? <NavLink className="nav-link" to="/login">
+          <Button>登录</Button>
+        </NavLink> : <Button onClick={this.logout}>{this.state.username}退出</Button>
+        }
         
-      </main>
-      <NavLink className="nav-link" to="/login">
-
-        <Button>确定</Button>
-      </NavLink>
-    </div>
-  );
+        
+      </div>
+    );
+  }
 }
 
 export default Home;

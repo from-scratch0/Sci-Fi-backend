@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { HashRouter as Router, Route, Switch, Redirect } from "react-router-dom";
+import { Router, Route, Switch, Redirect } from "react-router-dom";
 import "./style/common.less"
-import ScifiNavbar from "./pages/home/scifiNavbar";
+import ScifiNavbar from "./components/scifiNavbar";
 import Home from "./pages/home";
 import Movies from "./pages/movies";
 import Books from "./pages/books";
@@ -9,9 +9,17 @@ import Science from "./pages/science";
 import Press from "./pages/press";
 import Albums from "./pages/albums";
 import Passengers from "./pages/passengers";
-import NotFound from "./common/notFound";
+import NotFound from "./components/common/notFound";
 import logo from "./logo.png";
 import Login from './pages/login';
+import createHistory from 'history/createHashHistory';
+let history = createHistory();
+history.listen(loc => {
+    if(loc.pathname == '/' && !sessionStorage.getItem('username')) {
+        // history.push('/login');
+
+    }
+})
 
 
 class Routers extends Component {
@@ -22,7 +30,7 @@ class Routers extends Component {
                     <img src={logo} className="App-logo" alt="logo" />
                     <ScifiNavbar />    
                 </header>
-                <Router>
+                <Router history={history}>
                     <Switch>
                         <Route exact path = "/" component={Home} />
                         <Route path="/login" component={Login} />

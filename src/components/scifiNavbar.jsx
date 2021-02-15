@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Navbar from "../../common/navbar";
+import Navbar from "./common/navbar";
 
 class ScifiNavbar extends Component {
   navbarItems = [
